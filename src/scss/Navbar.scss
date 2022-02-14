@@ -1,0 +1,158 @@
+@import 'variables';
+@import 'mixins';
+@import 'breakpoints';
+
+nav {
+  width: 100%;
+  height: $navHeight;
+  position: fixed;
+  z-index: 3;
+  background-color: $navColor;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+
+  .navbar {
+    position: relative;
+    @include display-center;
+    height: 100%;
+
+    .logo {
+      height: 100%;
+      width: 3rem;
+      @include display-center;
+    }
+
+    .desktop-user {
+      display: none;
+    }
+    
+    .menu {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+      width: 2rem;
+      @include display-center;
+    }
+
+    .profile {
+      width: 50px;
+      height: 50px;
+      background-color: yellow;
+      border-radius: 50%;
+    }
+    
+    .mobile-sidebar {
+      position: fixed;
+      right: 0;
+      top: $navHeight;
+      background-color: $mobileSidebar;
+      width: 200px;
+      height: 100%;
+      padding-top: 3rem;
+      transition: all ease-in-out 0.2s;
+  
+
+      a {
+        display: block;
+        padding: .75rem .5rem;
+        display: flex;
+        align-items: center;
+
+        img {
+          margin-right: .5rem;
+        }
+      }
+
+      p {
+        margin: 0 0 1rem .5rem;
+      }
+
+
+      .mobile-sidebar-user {
+        // margin: 3rem 0;
+        padding: 0 .5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 2rem;
+      }
+  
+      .mobile-sidebar-categories {
+        margin-top: 3rem;
+
+      }
+  
+      .mobile-sidebar-logout {
+        margin-top: 3rem;
+        padding: 0 .5rem;
+        display: flex;
+        align-items: center;
+  
+        img {
+          margin-right: .5rem;
+        }
+      }
+  
+    
+
+    }
+  
+    .disable-mobile-sidebar {
+      transform: translateX(100%);
+      transition: all ease-in-out 0.2s;
+    }
+
+    
+  }
+  
+  @include md {
+    .navbar {
+      justify-content: space-between;
+
+      .menu {
+        display: none;
+      }
+  
+      .mobile-sidebar {
+        left: 0;
+  
+        
+  
+        .mobile-sidebar-user {
+          display: none;
+        }
+  
+        .mobile-sidebar-logout {
+          display: none;
+        }
+
+        .mobile-notification {
+          display: none;
+        }
+      }
+  
+      .disable-mobile-sidebar {
+        transform: translateX(0);
+      }
+
+      .desktop-user {
+        display: flex;
+        gap: 2rem;
+        // text-align: center;
+
+        & > * {
+          display: flex;
+          align-items: center;
+        }
+        // .desktop-logout {
+        // }
+      }
+    }
+
+    
+  }
+
+
+}
+
+
