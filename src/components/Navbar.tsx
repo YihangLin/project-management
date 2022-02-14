@@ -8,6 +8,7 @@ import design from '../assets/design.svg';
 import development from '../assets/development.svg';
 import marketing from '../assets/marketing.svg';
 import completed from '../assets/completed.svg';
+import inprogress from '../assets/inprogress.svg';
 
 import '../scss/Navbar.scss';
 import { useState } from 'react';
@@ -42,7 +43,10 @@ const Navbar = () => {
             <div className='profile'>
 
             </div>
-            <span>Name</span>
+            <div>
+              <span>Name</span>
+              <a href="#"><img src={notifications} alt="notifications" /></a>
+            </div>
           </div>
 
           <div className='mobile-sidebar-links'>
@@ -50,8 +54,8 @@ const Navbar = () => {
             <ul>
               <li><a href="#"><img src={home} alt="home" /> Home</a></li>
               <li><a href="#"><img src={tasks} alt="tasks" /> My Tasks</a></li>
+              <li><a href="#"><img src={inprogress} alt="inprogress" /> In Progress</a></li>
               <li><a href="#"><img src={completed} alt="completed" /> Completed</a></li>
-              <li className='mobile-notification' ><a href="#"><img src={notifications} alt="notifications" /> Notifications</a></li>
             </ul>
           </div>
 
