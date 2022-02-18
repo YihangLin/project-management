@@ -1,13 +1,19 @@
+@import 'breakpoints';
+
 .App {
   min-height: 100vh;
   overflow-x: hidden;
 }
 
 .main {
+  padding: 8vh 0 0 0;
   // padding-top: 8vh;
-  padding: 8vh 0 0 200px;
   // padding-left: 200px;
-  height: 150vh;
-  background-color: cornflowerblue;
+  // height: 150vh;
+  // background-color: cornflowerblue;
   width: 100%;
+
+  @include md {
+    padding: 8vh 0 0 200px;
+  }
 }

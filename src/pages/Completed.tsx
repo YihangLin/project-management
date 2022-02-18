@@ -1,7 +1,9 @@
+import Loading from "../components/Loading";
+
 const Completed = () => {
   return (
     <div>
-      <h1>Completed</h1>
+      <Loading />
     </div>
   )
 }
