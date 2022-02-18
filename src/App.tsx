@@ -2,6 +2,8 @@ import Navbar from './components/Navbar';
 import './scss/App.scss';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useAuthContext } from './hooks/useAuthContext';
+
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
@@ -11,28 +13,32 @@ import Development from './pages/Development';
 import Marketing from './pages/Marketing';
 import MyTasks from './pages/MyTasks';
 import InProgress from './pages/Inprogress';
+import Notifications from './pages/Notifications';
 
 function App() {
+  const { user, authIsReady } = useAuthContext();
+
   return (
     <div className="App">
-
-      <BrowserRouter>
-      <Navbar />
-
-      <div className='main'>
-        <Routes>
-          <Route path='/' element={ <Home /> } />
-          <Route path='/login' element={ <Login /> } />
-          <Route path='/signup' element={ <Signup /> } />
-          <Route path='/completed' element={ <Completed /> } />
-          <Route path='/design' element={ <Design /> } />
-          <Route path='/development' element={ <Development /> } />
-          <Route path='/marketing' element={ <Marketing /> } />
-          <Route path='/mytasks' element={ <MyTasks /> } />
-          <Route path='/inprogress' element={ <InProgress /> } />
-        </Routes>
-      </div>
-      </BrowserRouter>
+      {authIsReady && (
+        <BrowserRouter>
+        <Navbar />
+        <div className='main'>
+          <Routes>
+            <Route path='/' element={ user ? <Home /> : <Login /> } />
+            <Route path='/login' element={ user ? <Home /> : <Login /> } />
+            <Route path='/signup' element={ user ? <Home /> : <Signup /> } />
+            <Route path='/completed' element={ user ? <Completed /> : <Login /> } />
+            <Route path='/design' element={user ? <Design /> : <Login /> } />
+            <Route path='/development' element={user ? <Development /> : <Login /> } />
+            <Route path='/marketing' element={user ? <Marketing /> : <Login /> } />
+            <Route path='/mytasks' element={user ? <MyTasks /> : <Login /> } />
+            <Route path='/inprogress' element={user ? <InProgress /> : <Login /> } />
+            <Route path='/notifications' element={user ? <Notifications /> : <Login /> } />
+          </Routes>
+        </div>
+        </BrowserRouter>
+      )}
     </div>
   );
 }
