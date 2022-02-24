@@ -1,0 +1,106 @@
+@import 'variables';
+
+.project-list {
+  width: 300px;
+  // background-color: lightblue;
+  margin-bottom: 2rem;
+  // border: 1px solid rgb(218, 212, 212);
+  // box-shadow: 0px 0px 5px 0 rgba(0, 0, 0, 0.5);
+  // box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  // padding: 1rem;
+
+  .status {
+    // background-color: lightgreen;
+    // margin: .5rem 0;
+    padding: 1rem .5rem;
+    margin-bottom: 1rem;
+  }
+
+  .inwork {
+    border-bottom: 3px solid $inwork;
+  }
+
+  .completed {
+    border-bottom: 3px solid $completed;
+  }
+
+  .project-list-detail {
+    margin-top: 3rem;
+    padding: 0 1rem;
+
+    h3 {
+      margin-bottom: 1rem;
+    }
+
+    p {
+      line-height: 1.5;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      color: rgb(78, 78, 78);
+      // height: 266px;
+    }
+
+    // span {
+    //   display: inline-block;
+    //   margin: 1rem 0;
+    //   font-weight: 500;
+    // }
+
+    .development {
+      color: $development;
+    }
+
+    .design {
+      color: $design;
+    }
+
+    .marketing {
+      color: $marketing;
+    }
+
+    .project-list-category-users {
+      margin: 1rem 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      span {
+        // display: inline-block;
+        // margin: 1rem 0;
+        font-weight: 500;
+      }
+
+      .project-list-users {
+        display: flex;
+
+        .project-list-user-pic {
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          overflow: hidden;
+        }
+      }
+    }
+
+    .project-list-comments-dueDate {
+      padding-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: .875rem;
+
+      .project-list-comments {
+        display: flex;
+        align-items: center;
+        gap: .25rem;
+      }
+
+
+    }
+  
+  }
+}

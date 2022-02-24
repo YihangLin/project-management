@@ -1,14 +1,27 @@
 import React, { createContext, useReducer, useEffect } from "react";
 import { auth } from "../firebase/config";
-import { User, onAuthStateChanged } from 'firebase/auth';
+import { onAuthStateChanged } from 'firebase/auth';
 // interface Props {
 //   children: () => JSX.Element
 // }
 
+interface Notifications {
+  projectID: number,
+  msg: string
+}
+
+export interface User {
+  displayName: string | null,
+  photoURL: string | null,
+  id: string,
+  notifications?: Notifications[],
+  newMsg?: boolean
+}
+
 type Actions = 
   { type: 'LOGIN'; payload: User } | 
   { type: 'LOGOUT'; } |
-  { type: 'AUTH_IS_READY'; payload: User }
+  { type: 'AUTH_IS_READY'; payload: User | null }
 
 interface UserState {
   user: User | null ,
@@ -44,7 +57,16 @@ export const AuthContextProvider: React.FC = ({ children }) => {
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, user => {
-      dispatch({ type: 'AUTH_IS_READY', payload: user! });
+      if (user) {
+        let currentUser: User = {
+          displayName: user.displayName,
+          id: user.uid,
+          photoURL: user.photoURL
+        }
+        dispatch({ type: 'AUTH_IS_READY', payload: currentUser });
+      } else {
+        dispatch({ type: 'AUTH_IS_READY', payload: null });
+      }
       unsub();
     })
   }, [])
