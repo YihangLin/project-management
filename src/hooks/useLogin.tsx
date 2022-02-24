@@ -3,6 +3,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 
 import { useState, useEffect } from "react";
 import { useAuthContext } from "./useAuthContext";
+import { User } from "../context/AuthContext";
 
 export const useLogin = () => {
   const [error, setError] = useState<string | null>(null);
@@ -18,7 +19,13 @@ export const useLogin = () => {
       // login user
       const res = await signInWithEmailAndPassword(auth, email, password);
 
-      dispatch({ type: 'LOGIN', payload: res.user });
+      let currentUser: User = {
+        id: res.user.uid,
+        photoURL: res.user.photoURL,
+        displayName: res.user.displayName
+      }
+
+      dispatch({ type: 'LOGIN', payload: currentUser });
       // console.log(res);
 
       // update state

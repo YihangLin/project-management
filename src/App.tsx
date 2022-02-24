@@ -14,12 +14,16 @@ import Marketing from './pages/Marketing';
 import MyTasks from './pages/MyTasks';
 import InProgress from './pages/Inprogress';
 import Notifications from './pages/Notifications';
+import Loading from './components/Loading';
+import Create from './pages/Create';
+import ProjectDetail from './pages/ProjectDetail';
 
 function App() {
   const { user, authIsReady } = useAuthContext();
 
   return (
     <div className="App">
+      {!authIsReady && <Loading />}
       {authIsReady && (
         <BrowserRouter>
         <Navbar />
@@ -35,6 +39,8 @@ function App() {
             <Route path='/mytasks' element={user ? <MyTasks /> : <Login /> } />
             <Route path='/inprogress' element={user ? <InProgress /> : <Login /> } />
             <Route path='/notifications' element={user ? <Notifications /> : <Login /> } />
+            <Route path='/create' element={user ? <Create /> : <Login /> } />
+            <Route path='/project/:id' element={user ? <ProjectDetail /> : <Login /> } />
           </Routes>
         </div>
         </BrowserRouter>

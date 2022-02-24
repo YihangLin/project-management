@@ -1,14 +1,14 @@
 import { useCollection } from "../hooks/useColletion";
+import ProjectList from "../components/ProjectList";
+import '../scss/Home.scss';
 
 const Home = () => {
-  const { documents } = useCollection('users');
+  const { documents } = useCollection('projects');
 
   return (
-    <div>
+    <div className="home">
       {documents && documents.map(doc => (
-        <div key={doc.id}>
-          <p>{doc.displayName}</p>
-        </div>
+        <ProjectList key={doc.id} project={doc} />
       ))}
       {/* <h1>home</h1> */}
     </div>

@@ -3,11 +3,14 @@ import { auth, storage, db } from "../firebase/config";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { doc, setDoc } from 'firebase/firestore';
+import { useAuthContext } from "./useAuthContext";
+import { User } from "../context/AuthContext";
 
 export const useSignup = () => {
   const [error, setError] = useState<null | string>(null);
   const [isPending, setIsPending] = useState<boolean>(false);
   const [isCancelled, setIsCancelled] = useState<boolean>(false);
+  const { dispatch } = useAuthContext();
 
   const signup = async (displayName:string, email:string, password:string, thumbnail:File) => {
     setIsPending(true);
@@ -37,6 +40,14 @@ export const useSignup = () => {
         photoURL: imgUrl,
         notifications: [],
       })
+
+      let currentUser: User = {
+        id: res.user.uid,
+        displayName: res.user.displayName,
+        photoURL: res.user.photoURL
+      }
+
+      dispatch({ type: 'LOGIN', payload: currentUser });
 
       if (!isCancelled) {
         setIsPending(false);

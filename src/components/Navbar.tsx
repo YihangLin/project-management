@@ -35,7 +35,7 @@ const Navbar = () => {
             <img src={notifications} alt="notifications" />
             <span>{user!.displayName}</span>
             <div className='profile'>
-              <img src={user?.photoURL || undefined} alt="user photo" />
+              <img src={user?.photoURL || undefined} alt="user profile" />
             </div>
             <div className='desktop-logout' onClick={logout}>
               <img src={logoutImg} alt="logout" /><span>Logout</span>
@@ -57,7 +57,7 @@ const Navbar = () => {
           {user ? 
             <div className='mobile-sidebar-user'>
               <div className='profile'>
-                <img src={user && user.photoURL || undefined} alt="user photo" />
+                <img src={user?.photoURL || undefined} alt="user profile" />
               </div>
               <div>
                 <span>{user!.displayName}</span>
@@ -73,13 +73,13 @@ const Navbar = () => {
           
 
           <div className='mobile-sidebar-links'>
-            <Link className='create' to='/'><img src={add} alt="add" />New Project</Link>
+            <Link onClick={() => setMobileSidebar(false)} className='create' to='/create'><img src={add} alt="add" />New Project</Link>
             <p>Dashboard:</p>
             <ul onClick={() => setMobileSidebar(false)}>
               <li><NavLink to="/"><img src={home} alt="home" />Home</NavLink></li>
               <li><NavLink to="/inprogress"><img src={inprogress} alt="inprogress" />In Progress</NavLink></li>
-              <li><NavLink to="/completed"><img src={completed} alt="completed" /> ompleted</NavLink></li>
-              <li><NavLink to="mytasks"><img src={tasks} alt="tasks" />My Tasks</NavLink></li>
+              <li><NavLink to="/completed"><img src={completed} alt="completed" />Completed</NavLink></li>
+              <li><NavLink to="/mytasks"><img src={tasks} alt="tasks" />My Tasks</NavLink></li>
             </ul>
           </div>
 
