@@ -1,17 +1,11 @@
-import { Project } from "../pages/Create";
+// import { Project } from "../pages/Create";
+import { Project, ProjectProps } from "../Interfaces/Interfaces";
 import { Link } from "react-router-dom";
 import '../scss/ProjectList.scss';
 import Comments from '../assets/comments.svg';
 
-interface ProjectWithID extends Project {
-  id: string
-}
 
-interface Props {
-  project: ProjectWithID
-}
-
-const ProjectList: React.FC<Props> = ({ project }) => {
+const ProjectList: React.FC<ProjectProps> = ({ project }) => {
 
   const categoryColor = (category: string) => {
     switch (category) {
@@ -48,7 +42,7 @@ const ProjectList: React.FC<Props> = ({ project }) => {
           <div className='project-list-comments'>
             <img src={Comments} alt="comments" />
             {/* <span>{project.comments}</span> */}
-            {project.comments > 0 && <span>{project.comments}</span>}
+            {project.comments.length > 0 && <span>{project.comments}</span>}
           </div>
           <div>
             {project.dueDate.toDate().toDateString()}

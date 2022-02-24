@@ -2,34 +2,16 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Select from 'react-select';
 import { useCollection } from '../hooks/useColletion';
-import { User } from '../context/AuthContext';
-import { MultiValue, SingleValue } from 'react-select';
+import { Category, UsersList, Project, User } from "../Interfaces/Interfaces";
 import { Timestamp } from 'firebase/firestore';
+// import { User } from '../context/AuthContext';
+import { MultiValue, SingleValue } from 'react-select';
 import { useAuthContext } from '../hooks/useAuthContext';
 // import { ValueType } from 'react-select/lib/types';
 
 import { useFirestore } from '../hooks/useFirestore';
 
-interface Category {
-  value: string,
-  label: string
-}
 
-interface UsersList {
-  value: User,
-  label: string | null
-}
-
-export interface Project {
-  title: string,
-  details: string,
-  category: string,
-  createdBy: User,
-  dueDate: Timestamp,
-  assignedUsersList: User[],
-  comments: number,
-  completed: boolean
-}
 
 const categories: Category[] = [
   { value: 'development', label: 'Development' },
@@ -78,7 +60,7 @@ const Create = () => {
       dueDate: Timestamp.fromDate(new Date(dueDate)),
       createdBy: user!,
       assignedUsersList,
-      comments: 0,
+      comments: [],
       completed: false
     }
 

@@ -1,7 +1,8 @@
 import { db } from "../firebase/config";
 import { collection, addDoc, setDoc, doc } from "firebase/firestore";
 import { useState, useEffect } from 'react';
-import { Project } from '../pages/Create';
+import { Project } from "../Interfaces/Interfaces";
+// import { Project } from '';
 
 export const useFirestore = (collectionToAdd: string) => {
   const [firestoreError, setFirestoreError] = useState<string | null>(null);
