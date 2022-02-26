@@ -25,7 +25,7 @@ export interface Project {
   completed: boolean
 }
 
-interface ProjectWithID extends Project {
+export interface ProjectWithID extends Project {
   id: string
 }
 

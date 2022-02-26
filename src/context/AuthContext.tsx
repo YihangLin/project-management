@@ -24,7 +24,7 @@ export const authReducer = (state: InitialState, action: Actions) => {
 }
 
 export const AuthContextProvider: React.FC = ({ children }) => {
-  const { documents, collectionError } = useCollection('projects');
+  const { documents, collectionError } = useCollection('projects', 'dueDate');
   const [state, dispatch] = useReducer(authReducer , {
     user: null,
     authIsReady: false,
@@ -33,14 +33,6 @@ export const AuthContextProvider: React.FC = ({ children }) => {
   })
 
   useEffect(() => {
-    if (documents) {
-      dispatch({ type: 'PROJECTS_ARE_READY', payload: documents });
-    }
-
-    if (collectionError) {
-      dispatch({ type: 'ERROR', payload: collectionError });
-    }
-
     const unsub = onAuthStateChanged(auth, user => {
       if (user) {
         let currentUser: User = {
@@ -54,6 +46,16 @@ export const AuthContextProvider: React.FC = ({ children }) => {
       }
       unsub();
     })
+  }, [])
+
+  useEffect(() => {
+    if (documents) {
+      dispatch({ type: 'PROJECTS_ARE_READY', payload: documents });
+    }
+
+    if (collectionError) {
+      dispatch({ type: 'ERROR', payload: collectionError });
+    }
   }, [documents, collectionError])
 
   console.log('AuthContext state: ', state);

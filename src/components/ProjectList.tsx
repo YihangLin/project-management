@@ -1,5 +1,5 @@
 // import { Project } from "../pages/Create";
-import { Project, ProjectProps } from "../Interfaces/Interfaces";
+import { ProjectProps } from "../Interfaces/Interfaces";
 import { Link } from "react-router-dom";
 import '../scss/ProjectList.scss';
 import Comments from '../assets/comments.svg';

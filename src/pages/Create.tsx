@@ -53,6 +53,8 @@ const Create = () => {
       return u.value;
     })
 
+    console.log(dueDate);
+
     const project: Project = {
       title,
       details,
@@ -64,8 +66,9 @@ const Create = () => {
       completed: false
     }
 
+    // console.log(project)
+  
     await addDocument(project);
-    // addData();
     if (!firestoreError) {
       navigate('/');
     }
@@ -74,7 +77,7 @@ const Create = () => {
 
   useEffect(() => {
     const today: Date = new Date();
-    const current: string = today.getFullYear() + '-' + (('0' + today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
+    const current: string = today.getFullYear() + '-' + (('0' + (today.getMonth() + 1))).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
     setCurrentDate(current);
 
     if (documents) {

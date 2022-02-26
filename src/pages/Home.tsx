@@ -11,11 +11,14 @@ const Home = () => {
 
   
   return (
-    <div className="home">
-      {projects.length > 0 && projects.map(doc => (
-        <ProjectList key={doc.id} project={doc} />
-      ))}
-      {/* <h1>home</h1> */}
+    <div className='home-container'>
+      {projects.length > 0 ? <p>Total of {projects.length} Project(s): </p> : <p>No projects yet.</p>}
+      <div className="home">
+        {projects.length > 0 && projects.map(doc => (
+          <ProjectList key={doc.id} project={doc} />
+        ))}
+        {/* <h1>home</h1> */}
+      </div>
     </div>
   )
 }
