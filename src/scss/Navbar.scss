@@ -61,12 +61,16 @@ nav {
       position: fixed;
       right: 0;
       top: $navHeight;
-      background-color: $mobileSidebar;
+      // background-color: $mobileSidebar;
+      background-color: white;
       width: 200px;
       height: 100%;
       padding-top: 3rem;
       transition: all ease-in-out 0.2s;
-  
+      // box-shadow: rgba(50, 50, 93, 0.25) 2px 0px 5px -1px, rgba(0, 0, 0, 0.3) 1px 0px 3px -1px;
+      box-shadow: -1px 0px 0 1px rgba(50, 50, 93, 0.25);
+      box-shadow: rgba(50, 50, 93, 0.25) -2px 0px 5px -1px, rgba(0, 0, 0, 0.3) -1px 0px 3px -1px;
+
 
       a {
         display: block;
@@ -167,6 +171,8 @@ nav {
       .mobile-sidebar {
         left: 0;
   
+        box-shadow: rgba(50, 50, 93, 0.25) 2px 0px 5px -1px, rgba(0, 0, 0, 0.3) 1px 0px 3px -1px;
+
         a.active {
           border-left: none;
           border-right: 3px solid $primary;

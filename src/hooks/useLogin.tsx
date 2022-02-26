@@ -3,7 +3,8 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 
 import { useState, useEffect } from "react";
 import { useAuthContext } from "./useAuthContext";
-import { User } from "../context/AuthContext";
+// import { User } from "../context/AuthContext";
+import { User } from "../Interfaces/Interfaces";
 
 export const useLogin = () => {
   const [error, setError] = useState<string | null>(null);

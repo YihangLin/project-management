@@ -19,11 +19,12 @@ import Create from './pages/Create';
 import ProjectDetail from './pages/ProjectDetail';
 
 function App() {
-  const { user, authIsReady } = useAuthContext();
+  const { user, authIsReady, error } = useAuthContext();
 
   return (
     <div className="App">
       {!authIsReady && <Loading />}
+      {error && <div className='error'>{error}</div>}
       {authIsReady && (
         <BrowserRouter>
         <Navbar />

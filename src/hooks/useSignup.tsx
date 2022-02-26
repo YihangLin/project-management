@@ -4,7 +4,8 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { doc, setDoc } from 'firebase/firestore';
 import { useAuthContext } from "./useAuthContext";
-import { User } from "../context/AuthContext";
+import { User } from "../Interfaces/Interfaces";
+// import { User } from "../context/AuthContext";
 
 export const useSignup = () => {
   const [error, setError] = useState<null | string>(null);

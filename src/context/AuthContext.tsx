@@ -1,58 +1,35 @@
 import React, { createContext, useReducer, useEffect } from "react";
 import { auth } from "../firebase/config";
 import { onAuthStateChanged } from 'firebase/auth';
-// interface Props {
-//   children: () => JSX.Element
-// }
-
-interface Notifications {
-  projectID: number,
-  msg: string
-}
-
-export interface User {
-  displayName: string | null,
-  photoURL: string | null,
-  id: string,
-  notifications?: Notifications[],
-  newMsg?: boolean
-}
-
-type Actions = 
-  { type: 'LOGIN'; payload: User } | 
-  { type: 'LOGOUT'; } |
-  { type: 'AUTH_IS_READY'; payload: User | null }
-
-interface UserState {
-  user: User | null ,
-  authIsReady: boolean
-}
-
-interface ContextType extends UserState {
-  dispatch: React.Dispatch<Actions>
-}
-
-//{ state: UserState; dispatch: React.Dispatch<Actions> } | null
+import { User, Actions, InitialState, ContextType } from "../Interfaces/Interfaces";
+import { useCollection } from "../hooks/useColletion";
 
 export const AuthContext = createContext<ContextType | null>(null);
 
-export const authReducer = (state: UserState, action: Actions) => {
+export const authReducer = (state: InitialState, action: Actions) => {
   switch (action.type) {
     case 'LOGIN':
       return { ...state, user: action.payload };
     case 'LOGOUT': 
       return { ...state, user: null };
     case 'AUTH_IS_READY':
-      return { user: action.payload, authIsReady: true };
+      return { ...state, user: action.payload, authIsReady: true };
+    case 'PROJECTS_ARE_READY':
+      return { ...state, projects: action.payload };
+    case 'ERROR':
+      return { ...state, error: action.payload };
     default:
       return state;
   }
 }
 
 export const AuthContextProvider: React.FC = ({ children }) => {
+  const { documents, collectionError } = useCollection('projects', 'dueDate');
   const [state, dispatch] = useReducer(authReducer , {
     user: null,
-    authIsReady: false
+    authIsReady: false,
+    projects: [],
+    error: null
   })
 
   useEffect(() => {
@@ -70,6 +47,16 @@ export const AuthContextProvider: React.FC = ({ children }) => {
       unsub();
     })
   }, [])
+
+  useEffect(() => {
+    if (documents) {
+      dispatch({ type: 'PROJECTS_ARE_READY', payload: documents });
+    }
+
+    if (collectionError) {
+      dispatch({ type: 'ERROR', payload: collectionError });
+    }
+  }, [documents, collectionError])
 
   console.log('AuthContext state: ', state);
 

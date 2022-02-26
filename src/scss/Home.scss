@@ -1,6 +1,18 @@
-.home {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1rem;
-  justify-items: center;
+@import 'breakpoints';
+
+.home-container {
+  p {
+    margin-bottom: 1rem;
+  }
+
+  .home {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    justify-items: center;
+    @include md {
+      justify-items: normal;
+    }
+  }
 }
+
