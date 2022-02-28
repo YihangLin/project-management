@@ -1,16 +1,20 @@
-import { auth } from "../firebase/config";
+import { auth, db } from "../firebase/config";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { doc, updateDoc } from 'firebase/firestore';
 
 import { useState, useEffect } from "react";
 import { useAuthContext } from "./useAuthContext";
 // import { User } from "../context/AuthContext";
 import { User } from "../Interfaces/Interfaces";
+// import { useFirestore } from "./useFirestore";
 
 export const useLogin = () => {
   const [error, setError] = useState<string | null>(null);
   const [isPending, setIsPending] = useState<boolean>(false);
   const [isCancelled, setIsCancelled] = useState<boolean>(false);
   const { dispatch } = useAuthContext();
+
+  // const { firestoreError,  } = useFirestore('users');
 
   const login = async (email: string, password: string) => {
     setError(null);
@@ -27,6 +31,11 @@ export const useLogin = () => {
       }
 
       dispatch({ type: 'LOGIN', payload: currentUser });
+
+      const userRef = doc(db, 'users', res.user.uid);
+      await updateDoc(userRef, {
+        online: true
+      })
       // console.log(res);
 
       // update state

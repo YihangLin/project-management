@@ -42,7 +42,7 @@ const ProjectList: React.FC<ProjectProps> = ({ project }) => {
           <div className='project-list-comments'>
             <img src={Comments} alt="comments" />
             {/* <span>{project.comments}</span> */}
-            {project.comments.length > 0 && <span>{project.comments}</span>}
+            {project.comments.length > 0 && <span>{project.comments.length}</span>}
           </div>
           <div>
             {project.dueDate.toDate().toDateString()}

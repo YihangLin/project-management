@@ -10,8 +10,8 @@ export interface User {
   displayName: string | null,
   photoURL: string | null,
   id: string,
-  notifications?: Notifications[],
-  newMsg?: boolean
+  // notifications?: Notifications[],
+  // newMsg?: boolean
 }
 
 export interface Project {
@@ -61,7 +61,7 @@ export interface UsersList {
   label: string | null
 }
 
-interface Comment extends User {
+export interface Comment extends User {
   content: string,
   createdAt: Timestamp
 }
