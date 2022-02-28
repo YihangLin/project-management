@@ -17,6 +17,7 @@ import Notifications from './pages/Notifications';
 import Loading from './components/Loading';
 import Create from './pages/Create';
 import ProjectDetail from './pages/ProjectDetail';
+import PageNotFound from './pages/PageNotFound';
 
 function App() {
   const { user, authIsReady, error } = useAuthContext();
@@ -42,6 +43,7 @@ function App() {
             <Route path='/notifications' element={user ? <Notifications /> : <Login /> } />
             <Route path='/create' element={user ? <Create /> : <Login /> } />
             <Route path='/project/:id' element={user ? <ProjectDetail /> : <Login /> } />
+            <Route path='*' element={user ? <PageNotFound /> : <Login />} />
           </Routes>
         </div>
         </BrowserRouter>

@@ -1,5 +1,5 @@
 import { db } from "../firebase/config";
-import { collection, addDoc, setDoc, doc } from "firebase/firestore";
+import { collection, addDoc, setDoc, doc, updateDoc } from "firebase/firestore";
 import { useState, useEffect } from 'react';
 import { Project } from "../Interfaces/Interfaces";
 // import { Project } from '';
@@ -35,10 +35,34 @@ export const useFirestore = (collectionToAdd: string) => {
     }
   }
 
+  const updateDocument = async (id: string, docToUpdate: any) => {
+    setFirestorePending(true);
+    setFirestoreError(null);
+
+    try {
+      await updateDoc(doc(ref, id), docToUpdate);
+
+      if (!isCancelled) {
+        // console.log('setting');
+        setFirestorePending(false);
+      }
+      // console.log(updatedDoc);
+
+    } catch (err) {
+      if (!isCancelled) {
+        if (err instanceof Error) {
+          setFirestoreError(err.message);
+          setFirestorePending(false);
+        }
+      }
+    }
+
+  }
+
   useEffect(() => {
     return () => setIsCancelled(true);
   }, [])
 
-  return { firestoreError, firestorePending, addDocument };
+  return { firestoreError, firestorePending, addDocument, updateDocument };
 
 }

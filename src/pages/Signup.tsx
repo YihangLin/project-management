@@ -53,69 +53,71 @@ const Signup = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Sign up</h2>
-      <label>
-        <span>Display Name: </span>
-        <input
-          required
-          type="text"
-          onChange={(e) => setName(e.target.value)}
-          value={name}
-        />
-      </label>
+    <div className='form'>
+      <form onSubmit={handleSubmit}>
+        <h2>Sign up</h2>
+        <label>
+          <span>Display Name: </span>
+          <input
+            required
+            type="text"
+            onChange={(e) => setName(e.target.value)}
+            value={name}
+          />
+        </label>
 
-      <label>
-        <span>Email: </span>
-        <input
-          required
-          type="text"
-          onChange={(e) => setEmail(e.target.value)}
-          value={email}
-        />
-      </label>
+        <label>
+          <span>Email: </span>
+          <input
+            required
+            type="text"
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
+          />
+        </label>
 
-      <label>
-        <span>Password: </span>
-        <input
-          required
-          type="password"
-          onChange={(e) => setPassword(e.target.value)}
-          value={password}
-        />
-      </label>
+        <label>
+          <span>Password: </span>
+          <input
+            required
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
+          />
+        </label>
 
-      <label>
-        <span>Confirm Password: </span>
-        <input
-          required
-          type="password" 
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          value={confirmPassword}
-        />
-      </label>
+        <label>
+          <span>Confirm Password: </span>
+          <input
+            required
+            type="password" 
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            value={confirmPassword}
+          />
+        </label>
 
-      <label>
-        <span>Profile Thumbnail: </span>
-        <input
-          required
-          type="file"
-          onChange={handleFileChange}
-        />
-      </label>
+        <label>
+          <span>Profile Thumbnail: </span>
+          <input
+            required
+            type="file"
+            onChange={handleFileChange}
+          />
+        </label>
 
-      {!isPending && <button>Sign up</button>}
-      {isPending && <button disabled>Loading</button>}
+        {!isPending && <button>Sign up</button>}
+        {isPending && <button disabled>Loading</button>}
 
-      {formError && <div className='error'>{formError}</div>}
-      {error && <div className='error'>{error}</div>}
+        {formError && <div className='error'>{formError}</div>}
+        {error && <div className='error'>{error}</div>}
 
-      <div className='redirect'>
-        <p>Already have an account?</p>
-        <Link to='/login'>Login Here!</Link>
-      </div>
+        <div className='redirect'>
+          <p>Already have an account?</p>
+          <Link to='/login'>Login Here!</Link>
+        </div>
 
-    </form>
+      </form>
+    </div>
   )
 }
 

@@ -95,62 +95,64 @@ const Create = () => {
   }, [documents])
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Create a new project</h2>
+    <div className="form">
+      <form onSubmit={handleSubmit}>
+        <h2>Create a new project</h2>
 
-      <label>
-        <span>Project title: </span>
-        <input
-          required
-          type="text"
-          onChange={(e) => setTitle(e.target.value)}
-          value={title}
-        />
-      </label>
+        <label>
+          <span>Project title: </span>
+          <input
+            required
+            type="text"
+            onChange={(e) => setTitle(e.target.value)}
+            value={title}
+          />
+        </label>
 
-      <label>
-        <span>Project details: </span>
-        <textarea
-          required
-          onChange={(e) => setDetails(e.target.value)}
-          value={details}
-        ></textarea>
-      </label>
+        <label>
+          <span>Project details: </span>
+          <textarea
+            required
+            onChange={(e) => setDetails(e.target.value)}
+            value={details}
+          ></textarea>
+        </label>
 
-      <label>
-        <span>Project due date: </span>
-        <input
-          required
-          type="date"
-          min={currentDate}
-          onChange={(e) => setDueDate(e.target.value)}
-          value={dueDate}
-        />
-      </label>
+        <label>
+          <span>Project due date: </span>
+          <input
+            required
+            type="date"
+            min={currentDate}
+            onChange={(e) => setDueDate(e.target.value)}
+            value={dueDate}
+          />
+        </label>
 
-      <label>
-        <span>Project Category: </span>
-        <Select
-          options={categories}
-          onChange={(option) => setCategory(option)}
-        />
-      </label>
+        <label>
+          <span>Project Category: </span>
+          <Select
+            options={categories}
+            onChange={(option) => setCategory(option)}
+          />
+        </label>
 
-      <label>
-        <span>Assign to: </span>
-        <Select
-          options={users}
-          onChange={(option) => setAssignedUsers(option)}
-          isMulti
-        />
-      </label>
-      
-      {firestorePending && <button disabled>Loading</button>}
-      {!firestorePending && <button>Add Project</button>}
+        <label>
+          <span>Assign to: </span>
+          <Select
+            options={users}
+            onChange={(option) => setAssignedUsers(option)}
+            isMulti
+          />
+        </label>
+        
+        {firestorePending && <button disabled>Loading</button>}
+        {!firestorePending && <button>Add Project</button>}
 
-      {formError && <div className='error'>{formError}</div>}
-      {firestoreError && <div className='error'>{firestoreError}</div>}
-    </form>
+        {formError && <div className='error'>{formError}</div>}
+        {firestoreError && <div className='error'>{firestoreError}</div>}
+      </form>
+    </div>
   )
 }
 

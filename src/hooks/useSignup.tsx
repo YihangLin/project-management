@@ -40,6 +40,7 @@ export const useSignup = () => {
         displayName,
         photoURL: imgUrl,
         notifications: [],
+        online: true
       })
 
       let currentUser: User = {
