@@ -6,10 +6,13 @@ import { db } from "../firebase/config";
 export const useDocument = (collection: string, id: string | undefined) => {
   const [document, setDocument] = useState<any | null>(null);
   const [documentError, setDocumentError] = useState<string | null>(null);
+  const [documentPending, setDocumentPending] = useState<boolean>(false);
 
   useEffect(() => {
+    setDocumentPending(true);
     if (!id) {
       setDocumentError('No ducoment ID provided.');
+      setDocumentPending(false);
       return;
     }
     const ref = doc(db, collection, id);
@@ -20,14 +23,16 @@ export const useDocument = (collection: string, id: string | undefined) => {
       } else {
         setDocumentError('Document does not exist.');
       }
+      setDocumentPending(false);
     },
     (err) => {
       if (err instanceof Error) {
         setDocumentError('Failed to get document.');
+        setDocumentPending(false);
       }
     })
     return () => unsub();
   }, [collection, id])
 
-  return { document, documentError }
+  return { document, documentError, documentPending }
 }

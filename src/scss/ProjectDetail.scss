@@ -1,5 +1,6 @@
 @import 'variables';
 @import 'mixins';
+@import 'breakpoints';
 
 .project-detail {
   max-width: 1000px;
@@ -41,7 +42,7 @@
   .project-detail-content {
     color: $detail;
     line-height: 1.5;
-    margin-top: 1rem;
+    margin: 1rem 0;
   }
 
   .project-detail-category {
@@ -159,5 +160,37 @@
     margin-bottom: 1.5rem;
   }
 
-  
+  .project-detail-update-project {
+
+    margin-top: 1rem;
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    align-items: flex-start;
+
+    @include md {
+      flex-direction: row;
+    }
+    
+    button {
+      color: white;
+      // background-color: $primary;
+      // border: 1px solid $primary;
+      border-radius: 4px;
+      font-size: 1rem;
+      padding: .5em 1em;
+      cursor: pointer;
+    }
+
+    button:first-child {
+      background-color: $completed;
+      border: 1px solid $completed;
+      // outline: none;
+    }
+
+    button:last-child {
+      background-color: red;
+      border: 1px solid red;
+    }
+  }
 }
