@@ -1,5 +1,5 @@
 import { db } from "../firebase/config";
-import { collection, addDoc, setDoc, doc, updateDoc } from "firebase/firestore";
+import { collection, addDoc, setDoc, doc, updateDoc, deleteDoc } from "firebase/firestore";
 import { useState, useEffect } from 'react';
 import { Project } from "../Interfaces/Interfaces";
 // import { Project } from '';
@@ -59,10 +59,31 @@ export const useFirestore = (collectionToAdd: string) => {
 
   }
 
+  const deleteDocument = async (id: string) => {
+    setFirestorePending(true);
+    setFirestoreError(null);
+
+    try {
+      await deleteDoc(doc(ref, id));
+
+      if (!isCancelled) {
+        setFirestorePending(false);
+      }
+
+    } catch (err) {
+      if (!isCancelled) {
+        if (err instanceof Error) {
+          setFirestoreError(err.message);
+          setFirestorePending(false);
+        }
+      }
+    }
+  }
+
   useEffect(() => {
     return () => setIsCancelled(true);
   }, [])
 
-  return { firestoreError, firestorePending, addDocument, updateDocument };
+  return { firestoreError, firestorePending, addDocument, updateDocument, deleteDocument };
 
 }
