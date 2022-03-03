@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { ProjectProps, Comment } from "../Interfaces/Interfaces";
 import { useFirestore } from "../hooks/useFirestore";
-import { Timestamp } from "firebase/firestore";
+import { Timestamp, arrayUnion } from "firebase/firestore";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { formatDistanceToNow } from 'date-fns';
 
 
 const ProjectComments: React.FC<ProjectProps> = ({ project }) => {
   const { firestoreError, firestorePending, updateDocument } = useFirestore('projects');
+  const { firestoreError: firestoreUpdateNotificationError, updateDocument: updateUserNotification } = useFirestore('users');
   const { user } = useAuthContext();
   const [newComment, setNewComment] = useState<string>('');
 
@@ -31,6 +32,15 @@ const ProjectComments: React.FC<ProjectProps> = ({ project }) => {
     if (!firestoreError) {
       setNewComment('');
     }
+
+    await updateUserNotification(project.createdBy.id, {
+      newMsg: true,
+      notifications: arrayUnion({
+        msg: `${user!.displayName} commented on your project - ${project.title}`,
+        projectID: project.id,
+        createdAt: Timestamp.fromDate(new Date())
+      })
+    })
     // console.log(newComment);
   }
 

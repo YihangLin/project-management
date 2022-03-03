@@ -107,11 +107,26 @@ nav {
         // margin: 3rem 0;
         padding: 0 1rem;
         display: flex;
-        gap: 1rem;
+        gap: 2rem;
 
         // flex-direction: column;
         align-items: center;
         margin-bottom: 2rem;
+
+        a {
+          padding: 0;
+          position: relative;
+
+          span {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: red;
+            top: 0;
+            right: 8px;
+          }
+        }
       }
   
       .mobile-sidebar-categories {
@@ -203,6 +218,20 @@ nav {
         display: flex;
         gap: 2rem;
         // text-align: center;
+
+        a {
+          position: relative;
+
+          span {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background-color: red;
+            border-radius: 50%;
+            top: 25%;
+            right: 0;
+          }
+        }
 
         & > * {
           display: flex;

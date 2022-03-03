@@ -7,6 +7,7 @@ import '../scss/ProjectDetail.scss';
 
 import ProjectContent from "../components/ProjectContent";
 import ProjectComments from "../components/ProjectComments";
+import OnlineUsers from "../components/OnlineUsers";
 
 const ProjectDetail = () => {
   const { id } = useParams();
@@ -15,7 +16,7 @@ const ProjectDetail = () => {
   const { document, documentError, documentPending } = useDocument('projects', id);
 
   return (
-    <div>
+    <div className="project-detail-container">
       {documentError && <div className="error">{documentError}</div>}
 
       {documentPending && <Loading />}
@@ -26,9 +27,7 @@ const ProjectDetail = () => {
           <ProjectComments project={document}/>
         </div>
       }
-      <div>
-        <p>Users</p>
-      </div>
+      <OnlineUsers />
     </div>
   )
 }

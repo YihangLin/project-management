@@ -16,12 +16,13 @@ import { useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { useLogout } from '../hooks/useLogout';
 import { useAuthContext } from '../hooks/useAuthContext';
+import { useDocument } from '../hooks/useDocument';
 
 const Navbar = () => {
   const [mobileSidebar, setMobileSidebar] = useState<boolean>(false);
   const { logout } = useLogout();
   const { user } = useAuthContext();
-
+  const { document } = useDocument('users', user?.id);
 
   return (
     <nav>
@@ -32,7 +33,10 @@ const Navbar = () => {
         
         {user ? 
           <div className='desktop-user'>
-            <img src={notifications} alt="notifications" />
+            <Link to='/notifications'>
+              <img src={notifications} alt="notifications" />
+              { document && document.newMsg && <span></span>}
+            </Link>
             <span>{user!.displayName}</span>
             <div className='profile'>
               <img src={user?.photoURL || undefined} alt="user profile" />
@@ -61,7 +65,10 @@ const Navbar = () => {
               </div>
               <div>
                 <span>{user!.displayName}</span>
-                <Link to='/notifications' onClick={() => setMobileSidebar(false)}><img src={notifications} alt="notifications" /></Link>
+                <Link to='/notifications' onClick={() => setMobileSidebar(false)}>
+                  <img src={notifications} alt="notifications" />
+                  {document && document.newMsg && <span></span>}
+                </Link>
               </div>
             </div>
           :

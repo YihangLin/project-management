@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Select from 'react-select';
 import { useCollection } from '../hooks/useColletion';
 import { Category, UsersList, Project, User } from "../Interfaces/Interfaces";
-import { Timestamp } from 'firebase/firestore';
+import { Timestamp, arrayUnion } from 'firebase/firestore';
 // import { User } from '../context/AuthContext';
 import { MultiValue, SingleValue } from 'react-select';
 import { useAuthContext } from '../hooks/useAuthContext';
@@ -33,6 +33,7 @@ const Create = () => {
   const [formError, setFormError] = useState<string | null>(null);
 
   const { firestoreError, firestorePending, addDocument } = useFirestore('projects');
+  const { updateDocument, firestoreError: updateFirestoreError } = useFirestore('users');
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -53,7 +54,7 @@ const Create = () => {
       return u.value;
     })
 
-    console.log(dueDate);
+    // console.log(dueDate);
 
     const project: Project = {
       title,
@@ -68,7 +69,19 @@ const Create = () => {
 
     // console.log(project)
   
-    await addDocument(project);
+    const addedProjectID = await addDocument(project);
+
+    for (const u of assignedUsersList) {
+      await updateDocument(u.id, {
+        newMsg: true,
+        notifications: arrayUnion ({
+          msg: `You have been assigned to a new project - ${title}`,
+          projectID: addedProjectID,
+          createdAt: Timestamp.fromDate(new Date())
+        })
+      })
+    }
+
     if (!firestoreError) {
       navigate('/');
     }
@@ -146,11 +159,14 @@ const Create = () => {
           />
         </label>
         
+
         {firestorePending && <button disabled>Loading</button>}
         {!firestorePending && <button>Add Project</button>}
 
         {formError && <div className='error'>{formError}</div>}
         {firestoreError && <div className='error'>{firestoreError}</div>}
+        {updateFirestoreError && <div className="error">{updateFirestoreError}</div>}
+        
       </form>
     </div>
   )
