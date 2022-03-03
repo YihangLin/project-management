@@ -2,195 +2,208 @@
 @import 'mixins';
 @import 'breakpoints';
 
-.project-detail {
-  max-width: 1000px;
+.project-detail-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 
-  
-
-  .project-detail-title {
-    display: flex;
-    // gap: 1rem;
+  @include md {
+    flex-direction: row;
     justify-content: space-between;
-    align-items: center;
-    // height: 100%;
+  }
 
-    div {
-      @include display-center;
-      // display: flex;
+  .project-detail {
+    max-width: 1000px;
+  
+    
+  
+    .project-detail-title {
+      display: flex;
+      // gap: 1rem;
+      justify-content: space-between;
+      align-items: center;
       // height: 100%;
-      width: 60px;
-      // height: 60px;
-      // justify-content: center;
-      // align-items: center;
-
-      svg {
-        width: 100%;
+  
+      div {
+        @include display-center;
+        // display: flex;
         // height: 100%;
-        fill: $completed;
-      }
-      span {
-        color: $completed;
-      }
-    }
-  }
-
-  .project-detail-createdby {
-    font-size: .875rem;
-    color: $light;
-  }
-
-  .project-detail-content {
-    color: $detail;
-    line-height: 1.5;
-    margin: 1rem 0;
-  }
-
-  .project-detail-category {
-    display: inline-block;
-    padding: .25rem;
-    background-color: $development;
-    color: white;
-    border-radius: 10px;
-    font-size: .75rem;
-    // margin-top: 1rem;
-    margin: .5rem 0;
-    // margin: 0 0 1rem 0;
-  }
-
-  h4 {
-    margin-bottom: 1rem;
-  }
-
-  .project-detail-assigned-users {
-    display: flex;
-    gap: .5rem;
-    text-align: center;
-    margin-top: .5rem;
-    // justify-content: center;
-
-    .project-detail-user-img {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      overflow: hidden;
-    }
-  }
-
-  h3 {
-    margin: 3rem 0 1rem 0;
-    // margin-top: 3rem;
-  }
-
-  form {
-    display: flex;
-    width: 100%;
-    gap: 1rem;
-    margin-bottom: 3rem;
-    // input {
-    //   width: 100%;
-    //   line-height: 1rem;
-    //   padding: .5rem;
-    //   font-size: 1rem;
-    //   border-radius: 4px;
-    //   border: 1px solid $light;
-    //   outline: none;
-    // }
-
-    label {
-      // flex: 1 1 1;
-      // flex-basis: 90%;
-
-      width: 100%;
-
-      input {
-        width: 100%;
-        line-height: 1rem;
-        padding: .5rem;
-        font-size: 1rem;
-        // border-radius: 4px;
-        border: none;
-        outline: none;
-        border-bottom: 1px solid $light;
+        width: 60px;
+        // height: 60px;
+        // justify-content: center;
+        // align-items: center;
+  
+        svg {
+          width: 100%;
+          // height: 100%;
+          fill: $completed;
+        }
+        span {
+          color: $completed;
+        }
       }
     }
-
-
-    button {
-      // flex: 0 0 0;
-      // flex-basis: 0;
-      // flex: 0 0 0;
-      color: white;
-      background-color: $primary;
-      border: 1px solid $primary;
-      border-radius: 4px;
-      font-size: 1rem;
-      padding: .5em 1em;
-      cursor: pointer;
-    }
-  }
-
-  .project-detail-comment-user {
-
-    display: flex;
-    align-items: center;
-    // justify-content: center;
-    gap: .5rem;
-
-    // margin-bottom: 1.5rem;
-
-    .project-detail-comment-user-img {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      overflow: hidden;
-      display: inline-block;
-    }
-
-    .project-detail-comment-date {
-      // margin-left: .5rem;
+  
+    .project-detail-createdby {
       font-size: .875rem;
       color: $light;
     }
-
-  }
-
-  .project-detail-comment-content {
-    margin-left: 48px;
-    color: $detail;
-    margin-bottom: 1.5rem;
-  }
-
-  .project-detail-update-project {
-
-    margin-top: 1rem;
-    display: flex;
-    gap: 1rem;
-    flex-direction: column;
-    align-items: flex-start;
-
-    @include md {
-      flex-direction: row;
+  
+    .project-detail-content {
+      color: $detail;
+      line-height: 1.5;
+      margin: 1rem 0;
     }
-    
-    button {
+  
+    .project-detail-category {
+      display: inline-block;
+      padding: .25rem;
+      background-color: $development;
       color: white;
-      // background-color: $primary;
-      // border: 1px solid $primary;
-      border-radius: 4px;
-      font-size: 1rem;
-      padding: .5em 1em;
-      cursor: pointer;
+      border-radius: 10px;
+      font-size: .75rem;
+      // margin-top: 1rem;
+      margin: .5rem 0;
+      // margin: 0 0 1rem 0;
     }
-
-    button:first-child {
-      background-color: $completed;
-      border: 1px solid $completed;
-      // outline: none;
+  
+    h4 {
+      margin-bottom: 1rem;
     }
-
-    button:last-child {
-      background-color: red;
-      border: 1px solid red;
+  
+    .project-detail-assigned-users {
+      display: flex;
+      gap: .5rem;
+      text-align: center;
+      margin-top: .5rem;
+      // justify-content: center;
+  
+      .project-detail-user-img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        overflow: hidden;
+      }
+    }
+  
+    h3 {
+      margin: 3rem 0 1rem 0;
+      // margin-top: 3rem;
+    }
+  
+    form {
+      display: flex;
+      width: 100%;
+      gap: 1rem;
+      margin-bottom: 3rem;
+      // input {
+      //   width: 100%;
+      //   line-height: 1rem;
+      //   padding: .5rem;
+      //   font-size: 1rem;
+      //   border-radius: 4px;
+      //   border: 1px solid $light;
+      //   outline: none;
+      // }
+  
+      label {
+        // flex: 1 1 1;
+        // flex-basis: 90%;
+  
+        width: 100%;
+  
+        input {
+          width: 100%;
+          line-height: 1rem;
+          padding: .5rem;
+          font-size: 1rem;
+          // border-radius: 4px;
+          border: none;
+          outline: none;
+          border-bottom: 1px solid $light;
+        }
+      }
+  
+  
+      button {
+        // flex: 0 0 0;
+        // flex-basis: 0;
+        // flex: 0 0 0;
+        color: white;
+        background-color: $primary;
+        border: 1px solid $primary;
+        border-radius: 4px;
+        font-size: 1rem;
+        padding: .5em 1em;
+        cursor: pointer;
+      }
+    }
+  
+    .project-detail-comment-user {
+  
+      display: flex;
+      align-items: center;
+      // justify-content: center;
+      gap: .5rem;
+  
+      // margin-bottom: 1.5rem;
+  
+      .project-detail-comment-user-img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        overflow: hidden;
+        display: inline-block;
+      }
+  
+      .project-detail-comment-date {
+        // margin-left: .5rem;
+        font-size: .875rem;
+        color: $light;
+      }
+  
+    }
+  
+    .project-detail-comment-content {
+      margin-left: 48px;
+      color: $detail;
+      margin-bottom: 1.5rem;
+    }
+  
+    .project-detail-update-project {
+  
+      margin-top: 1rem;
+      display: flex;
+      gap: 1rem;
+      flex-direction: column;
+      align-items: flex-start;
+  
+      @include md {
+        flex-direction: row;
+      }
+      
+      button {
+        color: white;
+        // background-color: $primary;
+        // border: 1px solid $primary;
+        border-radius: 4px;
+        font-size: 1rem;
+        padding: .5em 1em;
+        cursor: pointer;
+      }
+  
+      button:first-child {
+        background-color: $completed;
+        border: 1px solid $completed;
+        // outline: none;
+      }
+  
+      button:last-child {
+        background-color: red;
+        border: 1px solid red;
+      }
     }
   }
+
 }
+

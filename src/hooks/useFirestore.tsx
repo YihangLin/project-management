@@ -1,5 +1,5 @@
 import { db } from "../firebase/config";
-import { collection, addDoc, setDoc, doc, updateDoc, deleteDoc } from "firebase/firestore";
+import { collection, addDoc, doc, updateDoc, deleteDoc } from "firebase/firestore";
 import { useState, useEffect } from 'react';
 import { Project } from "../Interfaces/Interfaces";
 // import { Project } from '';
@@ -17,14 +17,13 @@ export const useFirestore = (collectionToAdd: string) => {
 
     try {
       const addedDocument = await addDoc(ref, docToAdd);
-      await setDoc(doc(db, 'comments', addedDocument.id), {
-        comments: []
-      });
       // console.log(addedDocument);
       if (!isCancelled) {
         setFirestorePending(false);
         // setFirestoreError('Test Error');
       }
+
+      return addedDocument.id;
     } catch (err) {
       if (!isCancelled) {
         if (err instanceof Error) {

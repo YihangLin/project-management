@@ -1,9 +1,10 @@
 import { Timestamp } from 'firebase/firestore';
 
 
-interface Notifications {
+export interface Notification {
   projectID: number,
-  msg: string
+  msg: string,
+  createdAt: Timestamp
 }
 
 export interface User {

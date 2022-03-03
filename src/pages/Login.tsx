@@ -47,6 +47,12 @@ const Login = () => {
           <p>Don't have an account?</p>
           <Link to='/signup'>Sign Up Here!</Link>
         </div>
+
+      <div className="test">
+        <p>For test purpose use: </p>
+        <p>Email: test@test.com</p>
+        <p>Password: 123456</p>
+      </div>
       </form>
   </div>
   )
