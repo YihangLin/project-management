@@ -64,6 +64,7 @@ const ProjectComments: React.FC<ProjectProps> = ({ project }) => {
         {firestorePending && <button disabled>Loading</button>}
 
         {firestoreError && <div className="error">{firestoreError}</div>}
+        {firestoreUpdateNotificationError && <div className="error">{firestoreUpdateNotificationError}</div>}
       </form>
 
       {project.comments.length > 0 ? 

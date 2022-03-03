@@ -7,6 +7,8 @@ import { formatDistanceToNow } from "date-fns";
 import { useFirestore } from "../hooks/useFirestore";
 import { useEffect } from "react";
 import '../scss/Notifications.scss';
+import { db } from "../firebase/config";
+import { doc, updateDoc } from "firebase/firestore";
 
 const Notifications = () => {
   const { user } = useAuthContext();
@@ -14,17 +16,17 @@ const Notifications = () => {
   const { firestoreError, updateDocument, firestorePending } = useFirestore('users');
 
   useEffect(() => {
-    console.log('useEffect');
 
-    const updateNotificationStatus = async () => {
-      await updateDocument(user!.id, {
+    const userRef = doc(db, 'users', user!.id);
+
+    const updateUserNotification = async () => {
+      await updateDoc(userRef, {
         newMsg: false
       })
-      console.log('updated status');
     }
 
-    updateNotificationStatus();
-  }, [])
+    updateUserNotification();
+  }, [user])
 
   const handleDeleteAll = async () => {
     await updateDocument(user!.id, {

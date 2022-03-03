@@ -16,19 +16,20 @@ const ProjectDetail = () => {
   const { document, documentError, documentPending } = useDocument('projects', id);
 
   return (
-    <div className="project-detail-container">
+    <>
       {documentError && <div className="error">{documentError}</div>}
 
       {documentPending && <Loading />}
-
-      {document && 
-        <div className="project-detail">
-          <ProjectContent project={document}/>
-          <ProjectComments project={document}/>
-        </div>
-      }
-      <OnlineUsers />
-    </div>
+      <div className="project-detail-container">
+        {document && 
+          <div className="project-detail">
+            <ProjectContent project={document}/>
+            <ProjectComments project={document}/>
+          </div>
+        }
+        <OnlineUsers />
+      </div>
+    </>
   )
 }
 
