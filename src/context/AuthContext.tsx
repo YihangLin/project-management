@@ -33,6 +33,7 @@ export const AuthContextProvider: React.FC = ({ children }) => {
   })
 
   useEffect(() => {
+    // check if user is logged in or not
     const unsub = onAuthStateChanged(auth, user => {
       if (user) {
         let currentUser: User = {
@@ -49,6 +50,7 @@ export const AuthContextProvider: React.FC = ({ children }) => {
   }, [])
 
   useEffect(() => {
+    // get projects from firestore
     if (documents) {
       dispatch({ type: 'PROJECTS_ARE_READY', payload: documents });
     }
@@ -57,8 +59,6 @@ export const AuthContextProvider: React.FC = ({ children }) => {
       dispatch({ type: 'ERROR', payload: collectionError });
     }
   }, [documents, collectionError])
-
-  console.log('AuthContext state: ', state);
 
   return (
     <AuthContext.Provider value={{...state, dispatch}}>

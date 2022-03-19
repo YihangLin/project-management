@@ -2,7 +2,6 @@ import { db } from "../firebase/config";
 import { collection, addDoc, doc, updateDoc, deleteDoc } from "firebase/firestore";
 import { useState, useEffect } from 'react';
 import { Project } from "../Interfaces/Interfaces";
-// import { Project } from '';
 
 export const useFirestore = (collectionToAdd: string) => {
   const [firestoreError, setFirestoreError] = useState<string | null>(null);
@@ -11,16 +10,15 @@ export const useFirestore = (collectionToAdd: string) => {
 
   const ref = collection(db, collectionToAdd);
 
+  // add a document to the collection
   const addDocument = async (docToAdd: Project) => {
     setFirestorePending(true);
     setFirestoreError(null);
 
     try {
       const addedDocument = await addDoc(ref, docToAdd);
-      // console.log(addedDocument);
       if (!isCancelled) {
         setFirestorePending(false);
-        // setFirestoreError('Test Error');
       }
 
       return addedDocument.id;
@@ -34,6 +32,7 @@ export const useFirestore = (collectionToAdd: string) => {
     }
   }
 
+  // update a document
   const updateDocument = async (id: string, docToUpdate: any) => {
     setFirestorePending(true);
     setFirestoreError(null);
@@ -42,11 +41,8 @@ export const useFirestore = (collectionToAdd: string) => {
       await updateDoc(doc(ref, id), docToUpdate);
 
       if (!isCancelled) {
-        // console.log('setting');
         setFirestorePending(false);
       }
-      // console.log(updatedDoc);
-
     } catch (err) {
       if (!isCancelled) {
         if (err instanceof Error) {
@@ -55,9 +51,9 @@ export const useFirestore = (collectionToAdd: string) => {
         }
       }
     }
-
   }
 
+  // delete a document
   const deleteDocument = async (id: string) => {
     setFirestorePending(true);
     setFirestoreError(null);

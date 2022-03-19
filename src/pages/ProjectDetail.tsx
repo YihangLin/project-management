@@ -11,8 +11,6 @@ import OnlineUsers from "../components/OnlineUsers";
 
 const ProjectDetail = () => {
   const { id } = useParams();
-  // console.log(id);
-  // if (id) {
   const { document, documentError, documentPending } = useDocument('projects', id);
 
   return (

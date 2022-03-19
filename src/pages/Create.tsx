@@ -4,14 +4,9 @@ import Select from 'react-select';
 import { useCollection } from '../hooks/useColletion';
 import { Category, UsersList, Project, User } from "../Interfaces/Interfaces";
 import { Timestamp, arrayUnion } from 'firebase/firestore';
-// import { User } from '../context/AuthContext';
 import { MultiValue, SingleValue } from 'react-select';
 import { useAuthContext } from '../hooks/useAuthContext';
-// import { ValueType } from 'react-select/lib/types';
-
 import { useFirestore } from '../hooks/useFirestore';
-
-
 
 const categories: Category[] = [
   { value: 'development', label: 'Development' },
@@ -49,12 +44,9 @@ const Create = () => {
       return;
     }
 
-
     const assignedUsersList = assignedUsers.map(u => {
       return u.value;
     })
-
-    // console.log(dueDate);
 
     const project: Project = {
       title,
@@ -66,11 +58,10 @@ const Create = () => {
       comments: [],
       completed: false
     }
-
-    // console.log(project)
   
     const addedProjectID = await addDocument(project);
 
+    // set notification for each selected user
     for (const u of assignedUsersList) {
       await updateDocument(u.id, {
         newMsg: true,
@@ -93,6 +84,7 @@ const Create = () => {
     const current: string = today.getFullYear() + '-' + (('0' + (today.getMonth() + 1))).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
     setCurrentDate(current);
 
+    // get all users from firestore, store in an array for Select.
     if (documents) {
       const options: UsersList[] = documents.map((user: User) => {
         return { 
@@ -102,8 +94,6 @@ const Create = () => {
       })
       setUsers(options);
     }
-
-    // console.log(firestoreError);
 
   }, [documents])
 
@@ -163,6 +153,7 @@ const Create = () => {
         {firestorePending && <button disabled>Loading</button>}
         {!firestorePending && <button>Add Project</button>}
 
+        {/* check for errors */}
         {formError && <div className='error'>{formError}</div>}
         {firestoreError && <div className='error'>{firestoreError}</div>}
         {updateFirestoreError && <div className="error">{updateFirestoreError}</div>}

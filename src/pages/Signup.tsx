@@ -23,15 +23,13 @@ const Signup = () => {
     }
 
     signup(name, email, password, thumbnail!);
-    // console.log(name, email, password, confirmPassword, thumbnail);
   }
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setThumbNail(null);
     let file = e.target.files![0];
-    
-    // console.log(file);
 
+    // check if an image is selected and < 300kb
     if (!file) {
       setFormError('Please select a file.');
       return;

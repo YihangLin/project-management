@@ -1,9 +1,7 @@
-// import { Project } from "../pages/Create";
 import { ProjectProps } from "../Interfaces/Interfaces";
 import { Link } from "react-router-dom";
 import '../scss/ProjectList.scss';
 import Comments from '../assets/comments.svg';
-
 
 const ProjectList: React.FC<ProjectProps> = ({ project }) => {
 
@@ -27,7 +25,6 @@ const ProjectList: React.FC<ProjectProps> = ({ project }) => {
       <div className='project-list-detail'>
         <h3>{project.title}</h3>
         <p>{project.details}</p>
-        {/* <span>{project.category}</span> */}
         <div className='project-list-category-users'>
           {categoryColor(project.category)}
           <div className='project-list-users'>
@@ -41,7 +38,6 @@ const ProjectList: React.FC<ProjectProps> = ({ project }) => {
         <div className='project-list-comments-dueDate'>
           <div className='project-list-comments'>
             <img src={Comments} alt="comments" />
-            {/* <span>{project.comments}</span> */}
             {project.comments.length > 0 && <span>{project.comments.length}</span>}
           </div>
           <div>

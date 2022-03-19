@@ -11,8 +11,6 @@ export interface User {
   displayName: string | null,
   photoURL: string | null,
   id: string,
-  // notifications?: Notifications[],
-  // newMsg?: boolean
 }
 
 export interface Project {

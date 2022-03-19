@@ -10,18 +10,11 @@ export const useCollection = (_collection: string, _orderBy?: string) => {
   useEffect(() => {
     let ref: CollectionReference | Query = collection(db, _collection);
 
-    // if (_orderBy) {
-      // var ref = query(collection(db, _collection), orderBy(_orderBy));
-    // } else {
-    //   var ref = collection(db, _collection);
-    // }
-
     if (_orderBy) {
       ref = query(ref, orderBy(_orderBy));
     }
 
-    // const q = query(ref, orderBy('dueDate'));
-
+    // get a snapshot of a collection
     const unsub = onSnapshot(ref, (snapshot) => {
       let results:any[] = [];
       snapshot.docs.forEach(doc => {

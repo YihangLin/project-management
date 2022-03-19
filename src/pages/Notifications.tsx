@@ -19,6 +19,7 @@ const Notifications = () => {
 
     const userRef = doc(db, 'users', user!.id);
 
+    // update user's notification status.
     const updateUserNotification = async () => {
       await updateDoc(userRef, {
         newMsg: false

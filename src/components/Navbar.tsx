@@ -20,7 +20,7 @@ import { useDocument } from '../hooks/useDocument';
 
 const Navbar = () => {
   const [mobileSidebar, setMobileSidebar] = useState<boolean>(false);
-  const { logout } = useLogout();
+  const { logout, isPending } = useLogout();
   const { user } = useAuthContext();
   const { document } = useDocument('users', user?.id);
 
@@ -41,9 +41,16 @@ const Navbar = () => {
             <div className='profile'>
               <img src={user?.photoURL || undefined} alt="user profile" />
             </div>
-            <div className='desktop-logout' onClick={logout}>
-              <img src={logoutImg} alt="logout" /><span>Logout</span>
-            </div>
+            {!isPending && 
+              <div className='desktop-logout' onClick={logout}>
+                <img src={logoutImg} alt="logout" /><span>Logout</span>
+              </div>
+            }
+            {isPending &&
+              <div className='desktop-logout'>
+                <img src={logoutImg} alt="logout" /><span>Loading</span>
+              </div>
+            }
           </div>
         : 
           <div className='desktop-links'>
@@ -57,6 +64,7 @@ const Navbar = () => {
           <img src={menu} alt="menu" />
         </div>
 
+        {/* sidebar for mobiles */}
         <div className={`mobile-sidebar ${mobileSidebar ? '' : 'disable-mobile-sidebar'}`}>
           {user ? 
             <div className='mobile-sidebar-user'>
@@ -100,9 +108,18 @@ const Navbar = () => {
           </div>
 
           { user &&
-            <div className='mobile-sidebar-logout' onClick={logout}>
-              <img src={logoutImg} alt="logout" />Logout
-            </div>
+          <>
+            {!isPending &&
+              <div className='mobile-sidebar-logout' onClick={() => {logout(); setMobileSidebar(false);}}>
+                <img src={logoutImg} alt="logout" />Logout
+              </div>
+            }
+            {isPending &&
+              <div className='mobile-sidebar-logout'>
+                <img src={logoutImg} alt="logout" />Loading
+              </div>
+            }
+          </>
           }
         </div>
       </div>

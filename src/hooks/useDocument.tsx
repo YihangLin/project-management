@@ -16,6 +16,8 @@ export const useDocument = (collection: string, id: string | undefined) => {
       return;
     }
     const ref = doc(db, collection, id);
+
+    // get a snapshot of a specific document.
     const unsub = onSnapshot(ref, (doc) => {
       if (doc.data()) {
         setDocument({ ...doc.data(), id: doc.id });

@@ -12,8 +12,6 @@ const ProjectComments: React.FC<ProjectProps> = ({ project }) => {
   const { user } = useAuthContext();
   const [newComment, setNewComment] = useState<string>('');
 
-
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -41,7 +39,6 @@ const ProjectComments: React.FC<ProjectProps> = ({ project }) => {
         createdAt: Timestamp.fromDate(new Date())
       })
     })
-    // console.log(newComment);
   }
 
   return (

@@ -14,8 +14,6 @@ export const useLogin = () => {
   const [isCancelled, setIsCancelled] = useState<boolean>(false);
   const { dispatch } = useAuthContext();
 
-  // const { firestoreError,  } = useFirestore('users');
-
   const login = async (email: string, password: string) => {
     setError(null);
     setIsPending(true);
@@ -36,7 +34,6 @@ export const useLogin = () => {
       await updateDoc(userRef, {
         online: true
       })
-      // console.log(res);
 
       // update state
       if (!isCancelled) {

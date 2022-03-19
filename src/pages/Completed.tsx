@@ -1,22 +1,8 @@
-// import { useAuthContext } from "../hooks/useAuthContext";
-// import { useEffect, useState } from "react";
-// import { ProjectWithID } from '../Interfaces/Interfaces';
 import ProjectList from "../components/ProjectList";
 import { useFilter } from "../hooks/useFilter";
 
 const Completed = () => {
   const { filteredProjects } = useFilter('completed');
-  // const { projects } = useAuthContext();
-  // const [filteredProjects, setFilteredProjects] = useState<ProjectWithID[]>([]);
-
-  // useEffect(() => {
-  //   if (projects.length > 0) {
-  //     const newProjects = projects.filter((project) => (
-  //       project.completed === true
-  //     ))
-  //     setFilteredProjects(newProjects);
-  //   }
-  // }, [projects])
 
   return (
     <div className="home-container">
