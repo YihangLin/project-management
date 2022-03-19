@@ -3,15 +3,10 @@
 .App {
   min-height: 100vh;
   overflow-x: hidden;
-  // max-width: 500px;
 }
 
 .main {
   padding: 10vh .5rem 0 .5rem;
-  // padding-top: 8vh;
-  // padding-left: 200px;
-  // height: 150vh;
-  // background-color: cornflowerblue;
   width: 100%;
 
   @include md {
